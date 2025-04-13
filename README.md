@@ -16,8 +16,8 @@ are added or the list of commands is expanded.
 # Table of Contents
 
 - [Query Commands](#query-cheatsheet)
-	- [LIST](#list)
-		- [Simple List](#simple-list)
+  - [LIST](#list)
+    - [Simple List](#simple-list)
 	- [Table](#table)
 - [Data Commands](#data-commands)
 	- [FROM](#from)
@@ -54,7 +54,7 @@ are added or the list of commands is expanded.
 ```sql
 LIST
 FROM
-	<tag-name>
+  <tag-name>
 ```
 
 Example
@@ -62,17 +62,17 @@ Example
 ```sql
 LIST
 FROM
-	#library
+  #library
 ```
 
 ## Table
 
 ```sql
 TABLE
-	Title
-	Author
+  Title
+  Author
 FROM
-	#library
+  #library
 ```
 
 [Back to Contents](#table-of-contents)
@@ -97,9 +97,9 @@ Example
 
 ```sql
 TABLE
-	file.cday as "Created Date"
+  file.cday as "Created Date"
 FROM
-	#my-tag
+  #my-tag
 ```
 ### Single Files
 
@@ -109,9 +109,9 @@ Example
 
 ```sql
 TABLE
-	file.cday as "Created Date"
+  file.cday as "Created Date"
 FROM
-	"TopFolder/SubFolder/my-file-name"
+  "TopFolder/SubFolder/my-file-name"
 ```
 ### Folders
 
@@ -121,9 +121,9 @@ Example
 
 ```sql
 TABLE
-	file.cday as "Created Date"
+  file.cday as "Created Date"
 FROM
-	"my-folder-name"
+  "my-folder-name"
 ```
 
 ### Excluding Notes
@@ -136,12 +136,12 @@ Example
 
 ```sql
 TABLE
-	Title,
-	Rating,
-	Seen,
-	SeenDate as "Seen on"
+  Title,
+  Rating,
+  Seen,
+  SeenDate as "Seen on"
 FROM
-	#movie AND !#template
+  #movie AND !#template
 ```
 
 The above example will return all notes with a tag `#movie` but exclude notes 
@@ -157,12 +157,12 @@ Example
 
 ```sql
 TABLE
-	Title,
-	Rating,
-	Seen,
-	SeenDate as "Seen on"
+  Title,
+  Rating,
+  Seen,
+  SeenDate as "Seen on"
 FROM
-	#movie AND !"TemplatesFolder"
+  #movie AND !"TemplatesFolder"
 ```
 
 By including `!"FolderName"` we specify that we do not want to return any 
@@ -177,22 +177,22 @@ The `AND` operator queries notes that meet all criteria included in the query:
 
 ```sql
 TABLE
-	Title,
-	Author,
-	Publication
+  Title,
+  Author,
+  Publication
 FROM
-	"Books" AND "Magazines"
+  "Books" AND "Magazines"
 ```
 
 Using in conjunction with exclusion:
 
 ```sql
 TABLE
-	Title,
-	Author,
-	Publication
+  Title,
+  Author,
+  Publication
 FROM
-	"Books" AND "Books/assets"
+  "Books" AND "Books/assets"
 ```
 
 #### OR
@@ -200,22 +200,22 @@ The `OR` operator queries notes that meet any of the provided criteria:
 
 ```sql
 TABLE
-	Title,
-	Author,
-	Publication
+  Title,
+  Author,
+  Publication
 FROM
-	#horror OR #comedy
+  #horror OR #comedy
 ```
 
 Using in conjunction with exclusion:
 
 ```sql
 TABLE
-	Title
-	Author
-	Publication
+  Title
+  Author
+  Publication
 FROM
-	#horror OR #comedy AND !"Books/assets"
+  #horror OR #comedy AND !"Books/assets"
 ```
 
 [Back to Contents](#table-of-contents)
@@ -227,21 +227,21 @@ Examples of queries containing WHERE clause.
 
 ```sql
 WHERE
-	<property-name>
+  <property-name>
 ```
 
 Example
 
 ```sql
 TABLE
-	file.cday as "Created",
-	Category
+  file.cday as "Created",
+  Category
 FROM
-	#books
+  #books
 SORT
-	file.cday
+  file.cday
 WHERE
-	Category
+  Category
 ```
 
 The above example ensures to show only results where the meta-data 'Category' is not empty.
@@ -250,12 +250,12 @@ The above example ensures to show only results where the meta-data 'Category' is
 
 ```sql
 WHERE
-	<string-property-name> = "my-value"
+  <string-property-name> = "my-value"
 ```
 
 ```sql
 WHERE
-	<digit-property-name> = 123
+  <digit-property-name> = 123
 ```
 
 Examples
@@ -263,13 +263,13 @@ Examples
 ```sql
 LIST
 WHERE
-	category = "my-value"
+  category = "my-value"
 ```
 
 ```sql
 LIST
 WHERE
-	digitProperty = 123
+  digitProperty = 123
 ```
 
 [Back to Contents](#table-of-contents)
@@ -280,14 +280,14 @@ property in ascending (asc) or descending (desc) order:
 
 ```sql
 TABLE
-	Title,
-	Author,
-	Published,
-	Year
+  Title,
+  Author,
+  Published,
+  Year
 FROM
-	#library
+  #library
 SORT
-	Year asc
+  Year asc
 ```
 
 This should serve well for most use-cases. More complex sorting mechanisms 
@@ -300,29 +300,29 @@ The simplest method is to group by some property included in your frontmatter:
 
 ```sql
 GROUP BY
-	<property-name>
+  <property-name>
 ```
 
 Group by category in a table:
 
 ```sql
 TABLE 
-	rows.file.name as "File"
+  rows.file.name as "File"
 WHERE
-	category
+  category
 GROUP BY
-	category
+  category
 ```
 
 Group by category in a list:
 
 ```sql
 LIST
-	rows.file.name
+  rows.file.name
 WHERE
-	category = "first-category"
+  category = "first-category"
 GROUP BY
-	category
+  category
 ```
 
 NOTE: When using `GROUP BY`, the structure of the results changes. Instead of 
@@ -337,17 +337,17 @@ Use `FLATTEN` to display multiple properties in a single row
 
 ```sql
 FLATTEN
-	<property-name>
+  <property-name>
 ```
 
 Code example:
 
 ```sql
 TABLE
-	Title,
-	Action
+  Title,
+  Action
 FLATTEN
-	Action
+  Action
 ```
 
 Result example:
@@ -366,19 +366,19 @@ You can limit the results in a query:
 
 ```sql
 LIMIT
-	<numerical-value>
+  <numerical-value>
 ```
 
 Example:
 
 ```sql
 TABLE
-	Title,
-	Rating
+  Title,
+  Rating
 WHERE
-	Rating > 3
+  Rating > 3
 LIMIT
-	10
+  10
 ```
 
 ## Extras
@@ -395,10 +395,10 @@ Example
 
 ```sql
 TABLE
-	Author as "Author",
-	choice(read, "Yes", "No") as "Read",
+  Author as "Author",
+  choice(read, "Yes", "No") as "Read",
 FROM
-	"Books"
+  "Books"
 ```
 
 [Back to Contents](#table-of-contents)
